@@ -10,6 +10,11 @@ class Genre(models.Model):
 	def __str__(self):
 		return self.name
 
+class Language(models.Model):
+	name = models.CharField(max_length=50, help_text="Enter the book's language")
+	def __str__(self):
+		return self.name
+
 class Book(models.Model):
 	title = models.CharField(max_length=200)
 	author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True)
@@ -21,6 +26,7 @@ class Book(models.Model):
 
 	def get_absolute_url(self):
 		return reverse('book-detail', args=[str(self.id)])
+	language = models.ForeignKey(Language, on_delete=models.SET_NULL, null=True)
 
 class BookInstance(models.Model):
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for this book in the entire library")
