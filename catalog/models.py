@@ -28,6 +28,11 @@ class Book(models.Model):
 		return reverse('book-detail', args=[str(self.id)])
 	language = models.ForeignKey(Language, on_delete=models.SET_NULL, null=True)
 
+	def display_genre(self):
+		return ', '.join(genre.name for genre in self.genre.all()[:3])
+
+	display_genre.short_description = 'Genre'
+
 class BookInstance(models.Model):
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, help_text="Unique ID for this book in the entire library")
 	book = models.ForeignKey(Book, on_delete=models.RESTRICT, null=True)
