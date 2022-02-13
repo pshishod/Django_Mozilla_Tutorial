@@ -6,7 +6,7 @@
     <h4>Books</h4>
     {% for book in author.book_set.all %}
         <hr>
-        <h5>{{ book.title }}</h5>
+        <h5><a href = "{{ book.get_absolute_url }}">{{ book.title }}</a></h5>
         <p>{{ book.summary }}</p>
         <p class="text-muted"><strong>Id:</strong> {{ book.id }}</p>
     {% endfor %}
